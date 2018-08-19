@@ -1,5 +1,6 @@
 package com.example.keshl.nytreader.activitys;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,6 +15,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.webkit.DownloadListener;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.keshl.nytreader.Constants;
@@ -23,21 +26,38 @@ import com.example.keshl.nytreader.R;
 public class ArticleActivity extends AppCompatActivity {
 
     private WebView webView;
-    private SwipeRefreshLayout swipeRefresh;
     private FloatingActionButton floatingActionButton;
-
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article);
 
-        webView = findViewById(R.id.webView);
-        swipeRefresh = findViewById(R.id.swipeRefreshWebView);
         floatingActionButton = findViewById(R.id.floatingActionButton);
+        progressBar = findViewById(R.id.progressBarArticle);
 
+        initWebView();
         showArticle();
-        initSwipeRefresh();
+    }
+
+    private void initWebView() {
+        webView = findViewById(R.id.webView);
+        webView.getSettings().setUseWideViewPort(true);
+        webView.setWebViewClient(new WebViewClient(){
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                webView.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.GONE);
+                floatingActionButton.setVisibility(View.VISIBLE);
+
+            }
+        });
     }
 
     private void showArticle() {
@@ -51,17 +71,9 @@ public class ArticleActivity extends AppCompatActivity {
             showSnackbar(this.getString(R.string.not_connected_internet));
             floatingActionButton.setVisibility(View.GONE);
         }
-        swipeRefresh.setRefreshing(false);
     }
 
-    private void initSwipeRefresh() {
-        swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                showArticle();
-            }
-        });
-    }
+
 
 
     private boolean checkInternet(){
