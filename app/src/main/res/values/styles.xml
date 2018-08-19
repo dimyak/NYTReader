@@ -1,0 +1,29 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="CustomTabText" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="card_view_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/card_view_margin_top</item>
+        <item name="android:layout_marginBottom">@dimen/card_view_margin_bottom</item>
+        <item name="android:layout_marginLeft">@dimen/card_view_margin_left</item>
+        <item name="android:layout_marginRight">@dimen/card_view_margin_left</item>
+        <item name="cardBackgroundColor">@android:color/white</item>
+        <item name="contentPadding">@dimen/card_view_content_padding</item>
+        <item name="cardElevation">@dimen/card_view_card_elevation</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+    </style>
+
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Card View Margins -->
+    <dimen name="card_view_margin_top">0dp</dimen>
+    <dimen name="card_view_margin_bottom">10dp</dimen>
+    <dimen name="card_view_margin_left">0dp</dimen>
+    <dimen name="card_view_content_padding">16dp</dimen>
+    <dimen name="card_view_card_elevation">2dp</dimen>
+
+    <dimen name="floating_action_button_padding">16dp</dimen>
+
+</resources>

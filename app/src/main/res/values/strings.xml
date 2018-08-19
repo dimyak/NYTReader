@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">NYTReader</string>
+    
+    <string name="most_emailed_fragment">Most emailed</string>
+    <string name="most_shared_fragment">Most shared</string>
+    <string name="most_viewed_fragment">Most viewed</string>
+    <string name="favorites_fragment">Favorites</string>
+
+    <string name="not_connected_internet">No internet connection!</string>
+    <string name="show_empty_view">Check internet connection, and swipe down...</string>
+
+</resources>
