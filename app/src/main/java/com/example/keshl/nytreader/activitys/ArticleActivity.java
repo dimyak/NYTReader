@@ -61,7 +61,7 @@ public class ArticleActivity extends AppCompatActivity {
     }
 
     private void showArticle() {
-        if (checkInternet()){
+        if (NetworkUtil.isNetworkAvailable(this)){
             String articleUrl = getIntent().getExtras().getString(Constants.ARTICLE_URL);
             if (articleUrl!=null&&!articleUrl.isEmpty()){
                 webView.loadUrl(articleUrl);
@@ -71,13 +71,6 @@ public class ArticleActivity extends AppCompatActivity {
             showSnackbar(this.getString(R.string.not_connected_internet));
             floatingActionButton.setVisibility(View.GONE);
         }
-    }
-
-
-
-
-    private boolean checkInternet(){
-        return NetworkUtil.isNetworkAvailable(this);
     }
 
     private void showSnackbar(String message){

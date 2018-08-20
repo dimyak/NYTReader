@@ -80,7 +80,7 @@ public class BaseMostPopularFragment extends Fragment implements SwipeRefreshLay
 
     public void downloadDate() {
         if(!firstDownloadСompleted ||refresh){
-            if(checkInternet()) {
+            if(NetworkUtil.isNetworkAvailable(getContext())){
                 startDownload();
             }else {
 
@@ -92,10 +92,6 @@ public class BaseMostPopularFragment extends Fragment implements SwipeRefreshLay
                 showSnackbar(getContext().getString(R.string.not_connected_internet));
             }
         }
-    }
-
-    private boolean checkInternet(){
-        return NetworkUtil.isNetworkAvailable(getContext());
     }
 
     private void startDownload() {
