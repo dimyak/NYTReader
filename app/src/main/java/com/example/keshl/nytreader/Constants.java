@@ -6,4 +6,11 @@ public interface Constants {
     String TIME_PERIOD = "30";
     String SECTION = "all-sections";
     String ARTICLE_URL = "ArticleUrl";
+    String ARTICLE_TITLE = "ArticleTitle";
+    String ARTICLE_HTML = "ArticleHtml";
+
+    String ARTICLE_ACTIVITY_CASE = "ArticleCase";
+    String OPEN_ARTICLE = "OpenArticle";
+    String OPEN_DOWNLOAD_ARTICLE = "OpenDownloadArticle";
+
 }

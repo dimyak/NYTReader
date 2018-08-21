@@ -15,16 +15,17 @@ import com.bumptech.glide.Glide;
 import com.example.keshl.nytreader.Constants;
 import com.example.keshl.nytreader.R;
 import com.example.keshl.nytreader.activitys.ArticleActivity;
+import com.example.keshl.nytreader.model.ArticleDbModel;
 import com.example.keshl.nytreader.model.ResultsItem;
 
 import java.util.List;
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
+public class MostPopularRecyclerAdapter extends RecyclerView.Adapter<MostPopularRecyclerAdapter.ViewHolder> {
 
     private List<ResultsItem> resultsItems;
     private Context context;
 
-    public RecyclerAdapter(List<ResultsItem> resultsItems, Context context) {
+    public MostPopularRecyclerAdapter(List<ResultsItem> resultsItems, Context context) {
         this.resultsItems = resultsItems;
         this.context = context;
     }
@@ -45,7 +46,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, ArticleActivity.class);
-                intent.putExtra(Constants.ARTICLE_URL,resultsItems.get(position).getUrl());
+                intent.putExtra(Constants.ARTICLE_ACTIVITY_CASE,Constants.OPEN_ARTICLE);
+                intent.putExtra(Constants.ARTICLE_URL, resultsItems.get(position).getUrl());
+                intent.putExtra(Constants.ARTICLE_TITLE, resultsItems.get(position).getTitle());
                 context.startActivity(intent);
             }
         });

@@ -22,7 +22,7 @@ import com.example.keshl.nytreader.Constants;
 import com.example.keshl.nytreader.NYTApi;
 import com.example.keshl.nytreader.NetworkUtil;
 import com.example.keshl.nytreader.R;
-import com.example.keshl.nytreader.Adapters.RecyclerAdapter;
+import com.example.keshl.nytreader.Adapters.MostPopularRecyclerAdapter;
 import com.example.keshl.nytreader.RetrofitInstance;
 import com.example.keshl.nytreader.model.ResponceList;
 import com.example.keshl.nytreader.model.ResultsItem;
@@ -38,7 +38,7 @@ public class BaseMostPopularFragment extends Fragment implements SwipeRefreshLay
     private View view;
     private RecyclerView recyclerView;
     private TextView emptyList;
-    private RecyclerAdapter recyclerAdapter;
+    private MostPopularRecyclerAdapter mostPopularRecyclerAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
     private List<ResultsItem> resultsItems = new ArrayList<>();
     private boolean firstDownloadСompleted = false;
@@ -68,8 +68,8 @@ public class BaseMostPopularFragment extends Fragment implements SwipeRefreshLay
 
     private void initRecyclerView() {
         recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerAdapter = new RecyclerAdapter(resultsItems,getContext());
-        recyclerView.setAdapter(recyclerAdapter);
+        mostPopularRecyclerAdapter = new MostPopularRecyclerAdapter(resultsItems,getContext());
+        recyclerView.setAdapter(mostPopularRecyclerAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
@@ -108,7 +108,7 @@ public class BaseMostPopularFragment extends Fragment implements SwipeRefreshLay
                         resultsItems.clear();
                         resultsItems.addAll(responceList.getResults());
 
-                        recyclerAdapter.notifyDataSetChanged();
+                        mostPopularRecyclerAdapter.notifyDataSetChanged();
 
                        // Toast.makeText(getContext(),"Download",Toast.LENGTH_SHORT).show();
                         firstDownloadСompleted = true;
