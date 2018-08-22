@@ -18,11 +18,11 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.keshl.nytreader.Adapters.MostPopularRecyclerAdapter;
 import com.example.keshl.nytreader.Constants;
 import com.example.keshl.nytreader.NYTApi;
 import com.example.keshl.nytreader.NetworkUtil;
 import com.example.keshl.nytreader.R;
-import com.example.keshl.nytreader.Adapters.MostPopularRecyclerAdapter;
 import com.example.keshl.nytreader.RetrofitInstance;
 import com.example.keshl.nytreader.model.ResponceList;
 import com.example.keshl.nytreader.model.ResultsItem;

@@ -20,9 +20,7 @@ import android.widget.TextView;
 import com.example.keshl.nytreader.Constants;
 import com.example.keshl.nytreader.NetworkUtil;
 import com.example.keshl.nytreader.R;
-import com.example.keshl.nytreader.database.ArticleDbSchema;
 import com.example.keshl.nytreader.database.DBHelper;
-import com.example.keshl.nytreader.model.ArticleDbModel;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -40,7 +38,6 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
     private WebView webView;
     private FloatingActionButton floatingActionButton;
     private ProgressBar progressBar;
-
     private String title;
     private String pageHtml;
 
@@ -70,8 +67,10 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         ContentValues values = getContentValue();
         SQLiteDatabase db = new DBHelper(this).getWritableDatabase();
-        db.insert(ArticleTable.NAME,null, values);
-        showSnackbar("Article save");
+        if(db.insert(ArticleTable.NAME,null, values)>0){
+            showSnackbar("Article save");
+            floatingActionButton.setVisibility(View.GONE);
+        }
     }
 
     private ContentValues getContentValue() {

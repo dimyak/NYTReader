@@ -2,15 +2,12 @@ package com.example.keshl.nytreader.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,8 +16,6 @@ import com.example.keshl.nytreader.Constants;
 import com.example.keshl.nytreader.OnSavedRecycleListener;
 import com.example.keshl.nytreader.R;
 import com.example.keshl.nytreader.activitys.ArticleActivity;
-import com.example.keshl.nytreader.database.ArticleDbSchema;
-import com.example.keshl.nytreader.database.DBHelper;
 import com.example.keshl.nytreader.model.ArticleDbModel;
 
 import java.util.List;
@@ -45,15 +40,16 @@ public class FavoritesRecycleAdapter extends RecyclerView.Adapter<FavoritesRecyc
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        holder.title.setText(resultsItems.get(position).getTitle());
+    public void onBindViewHolder(@NonNull ViewHolder holder,int position) {
+        final int adapterPosition = holder.getAdapterPosition();
+        holder.title.setText(resultsItems.get(adapterPosition).getTitle());
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, ArticleActivity.class);
                 intent.putExtra(Constants.ARTICLE_ACTIVITY_CASE,Constants.OPEN_DOWNLOAD_ARTICLE);
-                intent.putExtra(Constants.ARTICLE_TITLE,resultsItems.get(position).getTitle());
+                intent.putExtra(Constants.ARTICLE_TITLE,resultsItems.get(adapterPosition).getTitle());
                 context.startActivity(intent);
             }
         });
@@ -61,8 +57,7 @@ public class FavoritesRecycleAdapter extends RecyclerView.Adapter<FavoritesRecyc
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //DELETE ARTICLE
-                onSavedRecycleListener.deleteItem(position);
+                onSavedRecycleListener.deleteItem(adapterPosition);
                 Toast.makeText(context,"Delete", Toast.LENGTH_SHORT).show();
             }
         });

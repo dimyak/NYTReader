@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +37,6 @@ public class FavoritesFragment extends Fragment implements OnSavedRecycleListene
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_layout, container, false);
 
-
         loadArticleDbList();
         initRecyclerView();
         initSwipeRefresh();
@@ -46,24 +44,20 @@ public class FavoritesFragment extends Fragment implements OnSavedRecycleListene
         return view;
     }
 
-    //Needs to refactor
     private void loadArticleDbList() {
         SQLiteDatabase db = new DBHelper(getContext()).getWritableDatabase();
-
         Cursor c = db.query( ArticleDbSchema.ArticleTable.NAME, null, null, null, null, null, null);
-
+        articleList.clear();
         if (c.moveToFirst()) {
 
-            int titleInedx = c.getColumnIndex( ArticleDbSchema.ArticleTable.Cols.TITLE);
-            int htmlInedx = c.getColumnIndex( ArticleDbSchema.ArticleTable.Cols.HTML);
-            articleList.clear();
-            do {
-                ArticleDbModel article = new ArticleDbModel(c.getString(titleInedx),c.getString(htmlInedx));
+            int titleIndex = c.getColumnIndex( ArticleDbSchema.ArticleTable.Cols.TITLE);
+            int htmlIndex = c.getColumnIndex( ArticleDbSchema.ArticleTable.Cols.HTML);
 
+            do {
+                ArticleDbModel article = new ArticleDbModel(c.getString(titleIndex),c.getString(htmlIndex));
                 articleList.add(article);
             } while (c.moveToNext());
-        } else
-            Log.d("HTML", "0 rows");
+        }
         c.close();
     }
 
@@ -95,7 +89,9 @@ public class FavoritesFragment extends Fragment implements OnSavedRecycleListene
                         new String[]{articleList.get(position).getTitle()});
 
         articleList.remove(position);
+        loadArticleDbList();
         favoritesRecycleAdapter.notifyDataSetChanged();
 
     }
+
 }

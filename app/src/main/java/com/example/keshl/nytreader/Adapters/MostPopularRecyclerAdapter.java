@@ -15,7 +15,6 @@ import com.bumptech.glide.Glide;
 import com.example.keshl.nytreader.Constants;
 import com.example.keshl.nytreader.R;
 import com.example.keshl.nytreader.activitys.ArticleActivity;
-import com.example.keshl.nytreader.model.ArticleDbModel;
 import com.example.keshl.nytreader.model.ResultsItem;
 
 import java.util.List;
