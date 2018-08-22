@@ -33,14 +33,13 @@ import java.util.regex.Pattern;
 
 import static com.example.keshl.nytreader.database.ArticleDbSchema.ArticleTable;
 
-public class ArticleActivity extends AppCompatActivity implements View.OnClickListener{
+public class ArticleActivity extends AppCompatActivity implements View.OnClickListener {
 
     private WebView webView;
     private FloatingActionButton floatingActionButton;
     private ProgressBar progressBar;
     private String title;
     private String pageHtml;
-
 
 
     @Override
@@ -52,7 +51,7 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
         initWebView();
         initFloatingActionButton();
 
-        switch (getIntent().getExtras().getString(Constants.ARTICLE_ACTIVITY_CASE)){
+        switch (getIntent().getExtras().getString(Constants.ARTICLE_ACTIVITY_CASE)) {
             case Constants.OPEN_ARTICLE:
                 downloadHtmlPage();
                 break;
@@ -67,7 +66,7 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         ContentValues values = getContentValue();
         SQLiteDatabase db = new DBHelper(this).getWritableDatabase();
-        if(db.insert(ArticleTable.NAME,null, values)>0){
+        if (db.insert(ArticleTable.NAME, null, values) > 0) {
             showSnackbar("Article save");
             floatingActionButton.setVisibility(View.GONE);
         }
@@ -93,14 +92,13 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void downloadHtmlPage() {
-        if(NetworkUtil.isNetworkAvailable(this)){
+        if (NetworkUtil.isNetworkAvailable(this)) {
             String articleUrl = getIntent().getExtras().getString(Constants.ARTICLE_URL);
-            if (articleUrl!=null && !articleUrl.isEmpty()){
+            if (articleUrl != null && !articleUrl.isEmpty()) {
                 new HtmlLoader().execute(articleUrl);
             }
             title = getIntent().getExtras().getString(Constants.ARTICLE_TITLE);
-        }
-        else {
+        } else {
             showSnackbar(this.getString(R.string.not_connected_internet));
             floatingActionButton.setVisibility(View.GONE);
         }
@@ -136,24 +134,23 @@ public class ArticleActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void showArticle() {
-        webView.loadData(pageHtml, "text/html; charset=utf-8",null);
+        webView.loadData(pageHtml, "text/html; charset=utf-8", null);
     }
 
-    private void showSnackbar(String message){
+    private void showSnackbar(String message) {
         Snackbar snackbar;
         snackbar = Snackbar.make(this.findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT);
         View snackBarView = snackbar.getView();
         snackBarView.setBackgroundColor(Color.RED);
         TextView textView = snackBarView.findViewById(android.support.design.R.id.snackbar_text);
         textView.setTextColor(Color.WHITE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         } else {
             textView.setGravity(Gravity.CENTER_HORIZONTAL);
         }
         snackbar.show();
     }
-
 
 
     class HtmlLoader extends AsyncTask<String, Void, String> {

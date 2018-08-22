@@ -14,7 +14,7 @@ import com.example.keshl.nytreader.fragments.MostSharedFragment;
 import com.example.keshl.nytreader.fragments.MostViewedFragment;
 
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -43,12 +43,12 @@ public class MainActivity extends AppCompatActivity{
         tabLayout.setupWithViewPager(viewPager);
     }
 
-    private void initViewPager(){
+    private void initViewPager() {
         TabsPageFragmentAdapter pageFragmentAdapter = new TabsPageFragmentAdapter(getSupportFragmentManager());
-        pageFragmentAdapter.addFragment(new MostEmailedFragment(),getString(R.string.most_emailed_fragment));
-        pageFragmentAdapter.addFragment(new MostSharedFragment(),getString(R.string.most_shared_fragment));
-        pageFragmentAdapter.addFragment(new MostViewedFragment(),getString(R.string.most_viewed_fragment));
-        pageFragmentAdapter.addFragment(new FavoritesFragment(),getString(R.string.favorites_fragment));
+        pageFragmentAdapter.addFragment(new MostEmailedFragment(), getString(R.string.most_emailed_fragment));
+        pageFragmentAdapter.addFragment(new MostSharedFragment(), getString(R.string.most_shared_fragment));
+        pageFragmentAdapter.addFragment(new MostViewedFragment(), getString(R.string.most_viewed_fragment));
+        pageFragmentAdapter.addFragment(new FavoritesFragment(), getString(R.string.favorites_fragment));
         viewPager.setAdapter(pageFragmentAdapter);
     }
 

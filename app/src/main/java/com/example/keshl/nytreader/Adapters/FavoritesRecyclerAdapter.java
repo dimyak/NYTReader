@@ -13,34 +13,34 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.keshl.nytreader.Constants;
-import com.example.keshl.nytreader.OnSavedRecycleListener;
+import com.example.keshl.nytreader.OnSavedRecyclerListener;
 import com.example.keshl.nytreader.R;
 import com.example.keshl.nytreader.activitys.ArticleActivity;
 import com.example.keshl.nytreader.model.ArticleDbModel;
 
 import java.util.List;
 
-public class FavoritesRecycleAdapter extends RecyclerView.Adapter<FavoritesRecycleAdapter.ViewHolder> {
+public class FavoritesRecyclerAdapter extends RecyclerView.Adapter<FavoritesRecyclerAdapter.ViewHolder> {
 
     private List<ArticleDbModel> resultsItems;
     private Context context;
-    private OnSavedRecycleListener onSavedRecycleListener;
+    private OnSavedRecyclerListener onSavedRecyclerListener;
 
-    public FavoritesRecycleAdapter(List<ArticleDbModel> resultsItems, Context context, OnSavedRecycleListener onSavedRecycleListener) {
+    public FavoritesRecyclerAdapter(List<ArticleDbModel> resultsItems, Context context, OnSavedRecyclerListener onSavedRecyclerListener) {
         this.resultsItems = resultsItems;
         this.context = context;
-        this.onSavedRecycleListener = onSavedRecycleListener;
+        this.onSavedRecyclerListener = onSavedRecyclerListener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v =  LayoutInflater.from(context).inflate(R.layout.recycler_save_element, parent,false);
+        View v = LayoutInflater.from(context).inflate(R.layout.favorite_recycler_element, parent, false);
         return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder,int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final int adapterPosition = holder.getAdapterPosition();
         holder.title.setText(resultsItems.get(adapterPosition).getTitle());
 
@@ -48,8 +48,8 @@ public class FavoritesRecycleAdapter extends RecyclerView.Adapter<FavoritesRecyc
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, ArticleActivity.class);
-                intent.putExtra(Constants.ARTICLE_ACTIVITY_CASE,Constants.OPEN_DOWNLOAD_ARTICLE);
-                intent.putExtra(Constants.ARTICLE_TITLE,resultsItems.get(adapterPosition).getTitle());
+                intent.putExtra(Constants.ARTICLE_ACTIVITY_CASE, Constants.OPEN_DOWNLOAD_ARTICLE);
+                intent.putExtra(Constants.ARTICLE_TITLE, resultsItems.get(adapterPosition).getTitle());
                 context.startActivity(intent);
             }
         });
@@ -57,11 +57,10 @@ public class FavoritesRecycleAdapter extends RecyclerView.Adapter<FavoritesRecyc
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onSavedRecycleListener.deleteItem(adapterPosition);
-                Toast.makeText(context,"Delete", Toast.LENGTH_SHORT).show();
+                onSavedRecyclerListener.deleteItem(adapterPosition);
+                Toast.makeText(context, "Delete", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
     @Override
@@ -69,7 +68,7 @@ public class FavoritesRecycleAdapter extends RecyclerView.Adapter<FavoritesRecyc
         return resultsItems.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView title;
         private CardView cardView;
         private ImageButton btnDelete;

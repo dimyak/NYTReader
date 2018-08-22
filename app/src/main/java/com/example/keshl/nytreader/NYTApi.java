@@ -13,12 +13,12 @@ public interface NYTApi {
     Call<ResponceList> getMostViewedDate(@Path("sections") String sections, @Path("days") String days,
                                          @Query("api-key") String apiKey);
 
-   @GET("mostshared/{sections}/{days}.json")
+    @GET("mostshared/{sections}/{days}.json")
     Call<ResponceList> getMostSharedDate(@Path("sections") String sections, @Path("days") String days,
                                          @Query("api-key") String apiKey);
 
     @GET("mostemailed/{sections}/{days}.json")
     Call<ResponceList> getMostEmailedDate(@Path("sections") String sections, @Path("days") String days,
-                                         @Query("api-key") String apiKey);
+                                          @Query("api-key") String apiKey);
 
 }

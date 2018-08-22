@@ -1,5 +1,5 @@
 package com.example.keshl.nytreader;
 
-public interface OnSavedRecycleListener {
+public interface OnSavedRecyclerListener {
     void deleteItem(int position);
 }

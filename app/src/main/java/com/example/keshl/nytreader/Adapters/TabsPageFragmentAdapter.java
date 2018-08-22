@@ -21,7 +21,7 @@ public class TabsPageFragmentAdapter extends FragmentPagerAdapter {
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-       return tabFragmentsTitle.get(position);
+        return tabFragmentsTitle.get(position);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class TabsPageFragmentAdapter extends FragmentPagerAdapter {
         return tabFragments.size();
     }
 
-    public void addFragment(Fragment fragment, String title){
+    public void addFragment(Fragment fragment, String title) {
         tabFragments.add(fragment);
         tabFragmentsTitle.add(title);
     }

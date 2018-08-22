@@ -12,7 +12,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "article.db";
 
     public DBHelper(Context context) {
-        super(context, DATABASE_NAME,null, VERSION);
+        super(context, DATABASE_NAME, null, VERSION);
     }
 
     @Override

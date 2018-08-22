@@ -6,7 +6,7 @@ import com.example.keshl.nytreader.model.ResponceList;
 
 import retrofit2.Call;
 
-public class MostViewedFragment extends BaseMostPopularFragment{
+public class MostViewedFragment extends BaseMostPopularFragment {
 
     @Override
     protected Call<ResponceList> getDate(NYTApi api) {

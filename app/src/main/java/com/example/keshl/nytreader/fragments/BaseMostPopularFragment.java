@@ -34,7 +34,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class BaseMostPopularFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener{
+public class BaseMostPopularFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     private View view;
     private RecyclerView recyclerView;
     private TextView emptyList;
@@ -48,7 +48,7 @@ public class BaseMostPopularFragment extends Fragment implements SwipeRefreshLay
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_layout, container, false);
+        view = inflater.inflate(R.layout.most_popular_fragment, container, false);
         emptyList = view.findViewById(R.id.textViewEmptyList);
         initFragment();
         downloadDate();
@@ -61,14 +61,14 @@ public class BaseMostPopularFragment extends Fragment implements SwipeRefreshLay
         downloadDate();
     }
 
-    private void initFragment(){
+    private void initFragment() {
         initRecyclerView();
         initSwipeRefresh();
     }
 
     private void initRecyclerView() {
         recyclerView = view.findViewById(R.id.recyclerView);
-        mostPopularRecyclerAdapter = new MostPopularRecyclerAdapter(resultsItems,getContext());
+        mostPopularRecyclerAdapter = new MostPopularRecyclerAdapter(resultsItems, getContext());
         recyclerView.setAdapter(mostPopularRecyclerAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
@@ -79,13 +79,13 @@ public class BaseMostPopularFragment extends Fragment implements SwipeRefreshLay
     }
 
     public void downloadDate() {
-        if(!firstDownloadСompleted ||refresh){
-            if(NetworkUtil.isNetworkAvailable(getContext())){
+        if (!firstDownloadСompleted || refresh) {
+            if (NetworkUtil.isNetworkAvailable(getContext())) {
                 startDownload();
-            }else {
+            } else {
 
-                if(!firstDownloadСompleted)
-                   showEmptyView();
+                if (!firstDownloadСompleted)
+                    showEmptyView();
 
                 swipeRefreshLayout.setRefreshing(false);
                 refresh = false;
@@ -101,22 +101,21 @@ public class BaseMostPopularFragment extends Fragment implements SwipeRefreshLay
         call.enqueue(new Callback<ResponceList>() {
             @Override
             public void onResponse(Call<ResponceList> call, Response<ResponceList> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     ResponceList responceList = response.body();
-                    if(responceList!=null){
+                    if (responceList != null) {
 
                         resultsItems.clear();
                         resultsItems.addAll(responceList.getResults());
 
                         mostPopularRecyclerAdapter.notifyDataSetChanged();
 
-                       // Toast.makeText(getContext(),"Download",Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(getContext(),"Download",Toast.LENGTH_SHORT).show();
                         firstDownloadСompleted = true;
                         hideEmptyView();
                     }
-                }
-                else {
-                    Toast.makeText(getContext(),"Error",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT).show();
                 }
                 swipeRefreshLayout.setRefreshing(false);
                 refresh = false;
@@ -124,7 +123,7 @@ public class BaseMostPopularFragment extends Fragment implements SwipeRefreshLay
 
             @Override
             public void onFailure(Call<ResponceList> call, Throwable t) {
-                Toast.makeText(getContext(),t.toString(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), t.toString(), Toast.LENGTH_SHORT).show();
                 swipeRefreshLayout.setRefreshing(false);
                 refresh = false;
             }
@@ -132,28 +131,28 @@ public class BaseMostPopularFragment extends Fragment implements SwipeRefreshLay
     }
 
     //need to Override in child Fragments
-    protected Call<ResponceList> getDate(NYTApi api){
-        return api.getMostSharedDate(Constants.SECTION,Constants.TIME_PERIOD, Constants.API_KEY);
+    protected Call<ResponceList> getDate(NYTApi api) {
+        return api.getMostSharedDate(Constants.SECTION, Constants.TIME_PERIOD, Constants.API_KEY);
     }
 
-    private void showEmptyView(){
+    private void showEmptyView() {
         emptyList.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.GONE);
     }
 
-    private void hideEmptyView(){
+    private void hideEmptyView() {
         emptyList.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);
     }
 
-    private void showSnackbar(String message){
+    private void showSnackbar(String message) {
         Snackbar snackbar;
         snackbar = Snackbar.make(getActivity().findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT);
         View snackBarView = snackbar.getView();
         snackBarView.setBackgroundColor(Color.RED);
         TextView textView = snackBarView.findViewById(android.support.design.R.id.snackbar_text);
         textView.setTextColor(Color.WHITE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         } else {
             textView.setGravity(Gravity.CENTER_HORIZONTAL);

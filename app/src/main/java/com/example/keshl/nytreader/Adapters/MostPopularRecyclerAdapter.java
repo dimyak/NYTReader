@@ -32,7 +32,7 @@ public class MostPopularRecyclerAdapter extends RecyclerView.Adapter<MostPopular
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v =  LayoutInflater.from(context).inflate(R.layout.recycler_elemet, parent,false);
+        View v = LayoutInflater.from(context).inflate(R.layout.most_popular_recycler_elemet, parent, false);
         return new ViewHolder(v);
     }
 
@@ -45,16 +45,16 @@ public class MostPopularRecyclerAdapter extends RecyclerView.Adapter<MostPopular
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, ArticleActivity.class);
-                intent.putExtra(Constants.ARTICLE_ACTIVITY_CASE,Constants.OPEN_ARTICLE);
+                intent.putExtra(Constants.ARTICLE_ACTIVITY_CASE, Constants.OPEN_ARTICLE);
                 intent.putExtra(Constants.ARTICLE_URL, resultsItems.get(position).getUrl());
                 intent.putExtra(Constants.ARTICLE_TITLE, resultsItems.get(position).getTitle());
                 context.startActivity(intent);
             }
         });
 
-        if(resultsItems.get(position).getMedia()!=null&&
-                resultsItems.get(position).getMedia().size()>0&&
-                resultsItems.get(position).getMedia().get(0).getMediaMetadata().size()>0){
+        if (resultsItems.get(position).getMedia() != null &&
+                resultsItems.get(position).getMedia().size() > 0 &&
+                resultsItems.get(position).getMedia().get(0).getMediaMetadata().size() > 0) {
             String urlImage = resultsItems.get(position).getMedia().get(0).getMediaMetadata().get(0).getUrl();
             Glide.with(context)
                     .asBitmap()
@@ -69,7 +69,7 @@ public class MostPopularRecyclerAdapter extends RecyclerView.Adapter<MostPopular
         return resultsItems.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView title, publishedDate;
         private ImageView imageView;
         private CardView cardView;
